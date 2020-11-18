@@ -17,4 +17,3 @@ Route::get('home', function () {
     return response('Hello World', 200)
         ->header('Content-Type', 'text/plain');
 });
-

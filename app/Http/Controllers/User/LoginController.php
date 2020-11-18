@@ -36,5 +36,4 @@ class LoginController extends Controller
             'message' => 'Successfully logged out',
         ], Response::HTTP_OK);
     }
-
 }

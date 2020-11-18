@@ -17,4 +17,3 @@ use Illuminate\Support\Facades\Route;
 
 // test routes
 require __DIR__ . '/test.php';
-

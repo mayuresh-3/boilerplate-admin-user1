@@ -37,9 +37,11 @@ class ResetPasswordController extends Controller
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
+            $this->credentials($request),
+            function ($user, $password) {
                 $this->resetPassword($user, $password);
-            });
+            }
+        );
 
         if ($response == Password::PASSWORD_RESET) {
             return response()->json([
@@ -62,7 +64,10 @@ class ResetPasswordController extends Controller
     protected function credentials(ResetPasswordRequest $request)
     {
         return $request->only(
-            'username', 'password', 'password_confirmation', 'token'
+            'username',
+            'password',
+            'password_confirmation',
+            'token'
         );
     }
 }
