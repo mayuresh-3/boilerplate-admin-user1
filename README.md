@@ -9,7 +9,9 @@ We have used darkaonline/l5-swagger(8.x)
 
 ##Specifications
 ####PHP : 7.2
+
 ####Laravel : 7
+
 ####Darkaonline/l5-swagger : 8.0.2 
     - https://quickadminpanel.com/blog/laravel-api-documentation-with-openapiswagger/
 
