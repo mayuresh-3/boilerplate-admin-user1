@@ -11,10 +11,6 @@ class LoginController extends Controller
 {
     use JwtResponse;
 
-    public function test() {
-        return response('Hello World', 200)
-            ->header('Content-Type', 'text/plain');
-    }
     /**
      * @return JsonResponse
      */

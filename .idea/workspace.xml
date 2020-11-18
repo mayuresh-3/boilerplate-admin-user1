@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a305b27f-83ea-4a3b-a2c8-95087a9dcc9d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/boilerplate-admin-user.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/boilerplate-admin-user.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/User/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api/user/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/user/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +134,11 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jrLESWJXri2rHxS4hynV9QhKhO" />
@@ -132,7 +149,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/routes/api/admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Exceptions" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -143,15 +160,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/routes/api" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Exceptions" />
+      <recent name="$PROJECT_DIR$/app/Http/Middleware" />
+      <recent name="$PROJECT_DIR$/app/Traits" />
       <recent name="$PROJECT_DIR$/routes/api/admin" />
       <recent name="$PROJECT_DIR$/routes/api/user" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/User" />
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/routes/api/user" />
+      <recent name="$PROJECT_DIR$/routes/api" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -166,6 +184,10 @@
       <command value="artisan make:controller User/UserController" />
       <command value="artisan make:model Models/Admin" />
       <command value="artisan config:clear" />
+      <command value="artisan make:controller ProjectsApiController" />
+      <command value="php artisan l5-swagger:publish-assets" />
+      <command value="artisan vendor:publish --provider &quot;L5Swagger\L5SwaggerServiceProvider&quot;" />
+      <command value="artisan l5-swagger:generate" />
     </option>
   </component>
   <component name="RunManager">
@@ -184,7 +206,12 @@
       <updated>1604557152971</updated>
       <workItem from="1604557154566" duration="1148000" />
       <workItem from="1604671838465" duration="313000" />
-      <workItem from="1605001244629" duration="6514000" />
+      <workItem from="1605001244629" duration="6910000" />
+      <workItem from="1605010685707" duration="3063000" />
+      <workItem from="1605091431361" duration="829000" />
+      <workItem from="1605104394530" duration="931000" />
+      <workItem from="1605107076039" duration="210000" />
+      <workItem from="1605692323696" duration="648000" />
     </task>
     <servers />
   </component>
@@ -192,38 +219,38 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="634" y="322" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605008369066">
+    <state x="634" y="322" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605014066963">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="634" y="322" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1605008369066" />
-    <state width="1792" height="332" key="GridCell.Tab.0.bottom" timestamp="1605008956220">
+    <state x="634" y="322" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1605014066963" />
+    <state width="1792" height="332" key="GridCell.Tab.0.bottom" timestamp="1605692730262">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1792" height="332" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605008956220" />
-    <state width="1792" height="332" key="GridCell.Tab.0.center" timestamp="1605008956219">
+    <state width="1792" height="332" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1605692730262" />
+    <state width="1792" height="332" key="GridCell.Tab.0.center" timestamp="1605692730261">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1792" height="332" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605008956219" />
-    <state width="1792" height="332" key="GridCell.Tab.0.left" timestamp="1605008956219">
+    <state width="1792" height="332" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1605692730261" />
+    <state width="1792" height="332" key="GridCell.Tab.0.left" timestamp="1605692730260">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1792" height="332" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605008956219" />
-    <state width="1792" height="332" key="GridCell.Tab.0.right" timestamp="1605008956220">
+    <state width="1792" height="332" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1605692730260" />
+    <state width="1792" height="332" key="GridCell.Tab.0.right" timestamp="1605692730262">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1792" height="332" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605008956220" />
-    <state x="595" y="299" width="602" height="550" key="find.popup" timestamp="1605009122964">
+    <state width="1792" height="332" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1605692730262" />
+    <state x="595" y="299" width="602" height="586" key="find.popup" timestamp="1605693153722">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="595" y="299" width="602" height="550" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605009122964" />
-    <state x="561" y="265" width="670" height="741" key="run.anything.popup" timestamp="1605008950937">
+    <state x="595" y="299" width="602" height="586" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605693153722" />
+    <state x="561" y="265" width="670" height="741" key="run.anything.popup" timestamp="1605693225761">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="265" width="670" height="741" key="run.anything.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605008950937" />
-    <state x="561" y="265" width="670" height="675" key="run.anything.popup/0.23.1792.1021@0.23.1792.1021" timestamp="1604557480010" />
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1605008388689">
+    <state x="561" y="265" width="670" height="741" key="run.anything.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605693225761" />
+    <state x="561" y="265" width="670" height="741" key="run.anything.popup/0.23.1792.1021@0.23.1792.1021" timestamp="1605092277777" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1605693075937">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605008388689" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1605693075937" />
   </component>
 </project>

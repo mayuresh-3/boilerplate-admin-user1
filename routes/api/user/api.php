@@ -17,4 +17,5 @@ use App\Http\Controllers\User\UserController;
 
     require __DIR__ . '/auth.php';
 
-
+// User routes
+require __DIR__ . '/user.php';

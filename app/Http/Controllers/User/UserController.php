@@ -7,7 +7,33 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function demo(){
 
+    /**
+     * @OA\Get(
+     *      path="/api/user/demo",
+     *      operationId="getProjectsList",
+     *      tags={"Projects"},
+     *      summary="Get list of projects",
+     *      description="Returns list of projects",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
+
+    public function demo()
+    {
+        return response('Hello World', 200)
+        ->header('Content-Type', 'text/plain');
     }
 }
