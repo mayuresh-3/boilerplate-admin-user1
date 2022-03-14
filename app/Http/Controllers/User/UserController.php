@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Transformers\UserTransformer;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -33,8 +40,25 @@ class UserController extends Controller
 
     public function demo()
     {
-        return response('Hello World', 200)
-        ->header('Content-Type', 'text/plain');
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                    'name',
+                    AllowedFilter::callback('email', function (Builder $query, $value) {
+                        $query->where('email', 'LIKE', $value);
+                    }),
+                ]
+            )
+            ->allowedSorts(
+                AllowedSort::field('name', 'email'),
+                'name'
+            )
+            ->jsonPaginate();
+
+        $response = fractal()
+            ->collection($users, new UserTransformer(), 'data')
+            ->paginateWith(new IlluminatePaginatorAdapter($users));
+
+        return response()->json($response, Response::HTTP_OK);
     }
 
     /**
