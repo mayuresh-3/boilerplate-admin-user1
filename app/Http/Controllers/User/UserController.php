@@ -56,7 +56,7 @@ class UserController extends Controller
 
         $response = fractal()
             ->collection($users, new UserTransformer(), 'data')
-            ->paginateWith(new IlluminatePaginatorAdapter($users));
+            ->paginateWith(new IlluminatePaginatorAdapter($users))->toArray();
 
         return response()->json($response, Response::HTTP_OK);
     }

@@ -12,10 +12,11 @@ class UserTransformer extends TransformerAbstract
      *
      * @var array
      */
-//    protected $availableIncludes = [
-//        'roles',
-//    ];
+    protected array $defaultIncludes = [
+        'roles'
+    ];
 
+    protected array $availableIncludes = [];
     /**
      * A Fractal transformer.
      *
@@ -29,18 +30,18 @@ class UserTransformer extends TransformerAbstract
             'name' => $users->name,
             'email' => $users->email,
             'created_at' => $users->created_at,
-//            'roles' => $this->addRoleIds($users),
+            'roles' => $this->addRoleIds($users),
 
         ];
     }
 
-//    public function includeRoles(User $users)
-//    {
-//        return $this->collection($users->roles, new RoleTransformer());
-//    }
-//
-//    public function addRoleIds(User $users)
-//    {
-//        return $users->roles->pluck('id');
-//    }
+    public function includeRoles(User $users)
+    {
+        return $this->collection($users->roles, new RoleTransformer());
+    }
+
+    public function addRoleIds(User $users)
+    {
+        return $users->roles->pluck('id');
+    }
 }
