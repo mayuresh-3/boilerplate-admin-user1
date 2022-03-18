@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
@@ -88,5 +90,20 @@ class UserController extends Controller
     {
         return response('Hello World!!!', 200)
             ->header('Content-Type', 'text/plain');
+    }
+
+    public function store(UserRequest $request)
+    {
+        $roleName = $request->get('role');
+        $userData = $request->all();
+        unset($userData['role']);
+        $userData['password'] = Hash::make($userData['password']);
+        $user = User::create($userData);
+        $user->assignRole($roleName);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Account created successfully',
+        ], Response::HTTP_CREATED);
     }
 }
