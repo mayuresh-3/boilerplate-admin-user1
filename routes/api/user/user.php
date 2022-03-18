@@ -2,7 +2,7 @@
 use App\Http\Controllers\User\UserController;
 
 Route::middleware('auth:users')->group(function () {
-    Route::get('/demo', [UserController::class, 'demo'])->name('demo');
+    Route::get('/list', [UserController::class, 'index']);
     Route::get('/test', [UserController::class, 'test']);
-    Route::post('/create-user', [UserController::class, 'store']);
+    Route::post('/register', [UserController::class, 'store']);
 });

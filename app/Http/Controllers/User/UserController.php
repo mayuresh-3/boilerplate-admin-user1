@@ -40,7 +40,7 @@ class UserController extends Controller
      *     )
      */
 
-    public function demo()
+    public function index()
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
