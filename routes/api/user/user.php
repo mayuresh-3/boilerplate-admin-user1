@@ -6,4 +6,5 @@ Route::middleware('auth:users')->group(function () {
     Route::get('/show/{id}', [UserController::class, 'show']);
     Route::get('/test', [UserController::class, 'test']);
     Route::delete('/destroy/{id}', [UserController::class, 'destroy']);
+    Route::post('/create', [UserController::class, 'store']);
 });
