@@ -11,6 +11,8 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 
 Route::post('login', [LoginController::class, 'login'])->name('login');
 
+Route::post('refresh-token', [LoginController::class, 'refresh'])->name('refresh');
+
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/register', [UserController::class, 'store']);
