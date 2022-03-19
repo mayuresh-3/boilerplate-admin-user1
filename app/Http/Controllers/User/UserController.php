@@ -45,14 +45,13 @@ class UserController extends Controller
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
-                    'name',
+                    'firstName',
                     'email',
                     AllowedFilter::custom('role', new FiltersUserPermission()),
                 ]
             )
             ->allowedSorts(
-                AllowedSort::field('name', 'email'),
-                'name'
+                AllowedSort::field('firstName', 'email'),
             )
             ->jsonPaginate();
 
