@@ -7,6 +7,7 @@ use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Transformers\UserTransformer;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -106,5 +107,22 @@ class UserController extends Controller
             'status' => 'success',
             'message' => 'Account created successfully',
         ], Response::HTTP_CREATED);
+    }
+
+    public function show($id) {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(null, Response::HTTP_NO_CONTENT);
+        }
+        $response = fractal()
+            ->item($user, new UserTransformer(), 'data')->toArray();
+
+        return response()->json($response,Response::HTTP_OK);
+    }
+
+    public function destroy($id) {
+        $user = User::find($id);
+        $user->forceDelete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
