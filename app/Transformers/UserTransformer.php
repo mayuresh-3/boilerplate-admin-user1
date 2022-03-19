@@ -27,7 +27,8 @@ class UserTransformer extends TransformerAbstract
     {
         return [
             'id' => $users->id,
-            'name' => $users->name,
+            'firstName' => $users->firstName,
+            'lastName' => $users->lastName,
             'email' => $users->email,
             'created_at' => $users->created_at,
             'roles' => $this->addRoleIds($users),

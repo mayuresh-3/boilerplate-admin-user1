@@ -97,6 +97,8 @@ class UserController extends Controller
         $roleName = $request->get('role');
         $userData = $request->all();
         unset($userData['role']);
+        unset($userData['confirmPassword']);
+        unset($userData['acceptTerms']);
         $userData['password'] = Hash::make($userData['password']);
         $user = User::create($userData);
         $user->assignRole($roleName);

@@ -27,8 +27,8 @@ class UserRequest extends FormRequest
         $accountId = optional($this->route('account'))->id;
 
         $rules = [
-            'name' => 'required|string',
-//            'last_name' => 'required|string',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
             'email' => 'required|email|unique:users,email, ' . $accountId,
             'password' => 'required|string|min:8|regex:/[0-9]/|regex:/[A-Z]/|regex:/[a-z]/',
         ];
