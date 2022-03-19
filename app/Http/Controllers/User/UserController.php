@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Transformers\UserTransformer;
@@ -45,9 +46,8 @@ class UserController extends Controller
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
                     'name',
-                    AllowedFilter::callback('email', function (Builder $query, $value) {
-                        $query->where('email', 'LIKE', $value);
-                    }),
+                    'email',
+                    AllowedFilter::custom('role', new FiltersUserPermission()),
                 ]
             )
             ->allowedSorts(
