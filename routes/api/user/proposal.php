@@ -1,10 +1,9 @@
 <?php
-use App\Http\Controllers\Proposal\ProposalController;
+use App\Http\Controllers\User\ProposalController;
 
-Route::middleware('auth:Proposals')->group(function () {
-    Route::get('/list', [ProposalController::class, 'index']);
-    Route::get('/show/{id}', [ProposalController::class, 'show']);
-    Route::get('/test', [ProposalController::class, 'test']);
-    Route::delete('/destroy/{id}', [ProposalController::class, 'destroy']);
-    Route::post('/create', [ProposalController::class, 'store']);
+Route::middleware('auth:users')->group(function () {
+    Route::get('/proposals', [ProposalController::class, 'index']);
+    Route::get('/proposals/{id}', [ProposalController::class, 'show']);
+    Route::delete('/proposals/{id}', [ProposalController::class, 'destroy']);
+    Route::post('/proposals', [ProposalController::class, 'store']);
 });
