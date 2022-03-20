@@ -22,3 +22,6 @@ require __DIR__ . '/user.php';
 
 // Proposal routes
 require __DIR__ . '/proposal.php';
+
+// Proposal routes
+require __DIR__ . '/campaign.php';
