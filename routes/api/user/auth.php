@@ -15,4 +15,4 @@ Route::post('refresh-token', [LoginController::class, 'refresh'])->name('refresh
 
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::post('/register', [UserController::class, 'store']);
+Route::post('register', [UserController::class, 'store']);
