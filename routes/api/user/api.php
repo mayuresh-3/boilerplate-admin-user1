@@ -30,3 +30,5 @@ require __DIR__ . '/campaign.php';
 // File upload
 require __DIR__ . '/fileUpload.php';
 
+// content library
+require __DIR__ . '/contentlibrary.php';
