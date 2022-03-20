@@ -10,6 +10,7 @@ use App\Transformers\ProposalTransformer;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
@@ -93,6 +94,8 @@ class ProposalController extends Controller
     {
        // $roleName = $request->get('role');
         $proposalData = $request->all();
+        $proposalData['created_by'] = auth()->user()->id;
+        $proposalData['advertiser_id'] = auth()->user()->id;
         $proposal = Proposal::create($proposalData);
         //$proposal->assignRole($roleName);
 
@@ -113,6 +116,17 @@ class ProposalController extends Controller
         return response()->json($response,Response::HTTP_OK);
     }
 
+    public function update(ProposalRequest $request, $id) {
+        $user = Proposal::find($id);
+        $proposalData = $request->all();
+        $proposalData['updated_by'] = auth()->user()->id;
+        $user->update($proposalData);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Proposal updated successfully',
+        ], Response::HTTP_CREATED);
+    }
     public function destroy($id) {
         $proposal = Proposal::find($id);
         $proposal->forceDelete();

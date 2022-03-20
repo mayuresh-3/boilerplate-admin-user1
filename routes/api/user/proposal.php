@@ -6,4 +6,5 @@ Route::middleware('auth:users')->group(function () {
     Route::get('/proposals/{id}', [ProposalController::class, 'show']);
     Route::delete('/proposals/{id}', [ProposalController::class, 'destroy']);
     Route::post('/proposals', [ProposalController::class, 'store']);
+    Route::put('/proposals/{id}', [ProposalController::class, 'update']);
 });
