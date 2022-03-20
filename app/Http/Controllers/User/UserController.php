@@ -48,6 +48,7 @@ class UserController extends Controller
         unset($userData['confirmPassword']);
         unset($userData['acceptTerms']);
         $userData['password'] = Hash::make($userData['password']);
+        $userData['created_by'] = optional(auth()->user())->id || 0;
         $user = User::create($userData);
         $user->assignRole($roleName);
 
@@ -66,6 +67,24 @@ class UserController extends Controller
             ->item($user, new UserTransformer(), 'data')->toArray();
 
         return response()->json($response,Response::HTTP_OK);
+    }
+
+    public function update(UserRequest $request, $id) {
+        $user = User::find($id);
+        $roleName = $request->get('role');
+        $userData = $request->all();
+        unset($userData['role']);
+        unset($userData['confirmPassword']);
+        unset($userData['acceptTerms']);
+        $userData['password'] = Hash::make($userData['password']);
+        $userData['updated_by'] = optional(auth()->user())->id || 0;
+        $user->update($userData);
+        $user->syncRoles($roleName);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Account created successfully',
+        ], Response::HTTP_CREATED);
     }
 
     public function destroy($id) {
