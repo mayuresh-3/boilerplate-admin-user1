@@ -19,3 +19,6 @@ use App\Http\Controllers\User\UserController;
 
 // User routes
 require __DIR__ . '/user.php';
+
+// File upload
+require __DIR__ . '/fileUpload.php';
