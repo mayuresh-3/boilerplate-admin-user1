@@ -2,48 +2,35 @@
 
 namespace App\Transformers;
 
-use App\Models\Proposal;
+use App\Models\Campaign;
 use League\Fractal\TransformerAbstract;
 
-class ProposalTransformer extends TransformerAbstract
+class CampaignTransformer extends TransformerAbstract
 {
-    /**
-     * List of resources possible to include.
-     *
-     * @var array
-     */
-    protected array $defaultIncludes = [
-        'roles'
-    ];
+
 
     protected array $availableIncludes = [];
     /**
      * A Fractal transformer.
      *
-     * @param Proposal $proposals
+     * @param Proposal $campagin
      * @return array
      */
-    public function transform(Proposal $proposals)
+    public function transform(Campaign $campaign)
     {
         return [
-            'id' => $proposals->id,
-            'title' => $proposals->title,
-            'description' => $proposals->description,
-            'start_date' => $proposals->start_date,
-            'end_date' => $proposals->end_date,
-            'created_at' => $proposals->created_at,
-            'advertiser_id' => $proposals->advertiser_id,
-            'status' => $proposals->status,
+            'id' => $campaign->id,
+            'title' => $campaign->title,
+            'description' => $campaign->description,
+            'start_date' => $campaign->start_date,
+            'end_date' => $campaign->end_date,
+            'budget' => $campaign->budget,
+            'created_at' => $campaign->created_at,
+            'updated_at' => $campaign->updated_at,
+            'advertiser_id' => $campaign->advertiser_id,
+            'proposal_id' => $campaign->proposal_id,
+            'status' => $campaign->status
         ];
     }
 
-    public function includeRoles(Proposal $proposals)
-    {
-        return $this->collection($proposals->roles, new RoleTransformer());
-    }
-
-    public function addRoleIds(Proposal $proposals)
-    {
-        return $proposals->roles->pluck('id');
-    }
 }

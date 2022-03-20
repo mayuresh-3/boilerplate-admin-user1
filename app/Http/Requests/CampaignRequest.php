@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
 
-class UserRequest extends FormRequest
+class CampaignRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,9 @@ class UserRequest extends FormRequest
         $accountId = optional($this->route('account'))->id;
 
         $rules = [
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
-            'email' => 'required|email|unique:users,email, ' . $accountId,
-            'password' => 'required|string|min:8|regex:/[0-9]/|regex:/[A-Z]/|regex:/[a-z]/',
+            'title' => 'required|string',
+            /*'start_date' => 'required|date',
+            'end_date' => 'required|date',*/
         ];
 
         return $this->applyRules($rules);
