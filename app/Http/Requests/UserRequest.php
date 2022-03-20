@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $accountId = optional($this->route('account'))->id;
+        $accountId = $this->route('id');
 
         $rules = [
             'firstName' => 'required|string',

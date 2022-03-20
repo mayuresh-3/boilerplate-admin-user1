@@ -20,8 +20,13 @@ use App\Http\Controllers\User\UserController;
 // User routes
 require __DIR__ . '/user.php';
 
+
 // Proposal routes
 require __DIR__ . '/proposal.php';
 
-// Proposal routes
+// Campaign routes
 require __DIR__ . '/campaign.php';
+
+// File upload
+require __DIR__ . '/fileUpload.php';
+
