@@ -106,7 +106,8 @@ class ProposalController extends Controller
     }
 
     public function show($id) {
-        $proposal = Proposal::find($id);
+        $proposal = Proposal::with('advertiser')->where('id',$id )->first();
+       // $proposal = Proposal::find($id);
         if (!$proposal) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
         }

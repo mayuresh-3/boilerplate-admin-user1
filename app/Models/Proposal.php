@@ -56,5 +56,8 @@ class Proposal extends Model
 
         return [];
     }
-    //
+    public function advertiser()
+    {
+        return $this->belongsTo(Advertiser::class, 'advertiser_id','user_id');
+    }
 }
