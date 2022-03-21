@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\ProposalRequest;
 use App\Models\Proposal;
 use App\Transformers\ProposalTransformer;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
@@ -48,7 +44,12 @@ class ProposalController extends Controller
             ->with('advertiser.user')
             ->with('campaigns')
             ->allowedFilters([
-                    'title'
+                    'title',
+                    'created_at',
+                    AllowedFilter::scope('created_at_before'),
+                    AllowedFilter::scope('created_at_between'),
+                    AllowedFilter::scope('start_date_before'),
+                    AllowedFilter::scope('start_date_between'),
                 ]
             )
             ->allowedSorts(
@@ -94,12 +95,10 @@ class ProposalController extends Controller
 
     public function store(ProposalRequest $request)
     {
-       // $roleName = $request->get('role');
         $proposalData = $request->all();
         $proposalData['created_by'] = auth()->user()->id;
         $proposalData['advertiser_id'] = auth()->user()->id;
         $proposal = Proposal::create($proposalData);
-        //$proposal->assignRole($roleName);
 
         return response()->json([
             'status' => 'success',
