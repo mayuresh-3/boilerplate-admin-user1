@@ -35,26 +35,8 @@ class Campaign extends Model
     protected $casts = [
 
     ];
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
+    public function proposal()
     {
-        return $this->getKey();
+        $this->belongsTo(Proposal::class,'id','proposal_id');
     }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-
-        return [];
-    }
-    //
 }

@@ -15,7 +15,7 @@ class ProposalTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-//        'advertiser'
+        'campaigns'
     ];
     protected array $availableIncludes = [];
     /**
@@ -47,9 +47,9 @@ class ProposalTransformer extends TransformerAbstract
         ];
     }
 
-    public function advertiser(Advertiser $advertiser)
+    public function includeCampaigns(Proposal $proposal)
     {
-        return $this->collection($advertiser, new AdvertiserTransformer());
+        return $this->collection($proposal->campaigns, new CampaignTransformer());
     }
 //    public function includeAdvertiser(Proposal $proposals)
 //    {
