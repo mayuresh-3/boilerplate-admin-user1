@@ -42,6 +42,7 @@ class ProposalTransformer extends TransformerAbstract
                 'firstName' => $proposals->advertiser->user->firstName,
                 'lastName' => $proposals->advertiser->user->lastName,
                 'email' => $proposals->advertiser->user->email,
+                'photo' => $proposals->advertiser->user->photo,
             ]
         ];
     }
