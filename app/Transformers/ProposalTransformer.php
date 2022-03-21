@@ -15,7 +15,7 @@ class ProposalTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-        'advertiser'
+//        'advertiser'
     ];
     protected array $availableIncludes = [];
     /**
@@ -36,13 +36,22 @@ class ProposalTransformer extends TransformerAbstract
             'max_budget' => $proposals->max_budget,
             'created_at' => $proposals->created_at,
             'updated_at' => $proposals->updated_at,
-            'advertiser_id' => $proposals->advertiser_id,
-            'status' => $proposals->status
+            'status' => $proposals->status,
+            'advertiser' => [
+                'advertiser_id' => $proposals->advertiser->user_id,
+                'firstName' => $proposals->advertiser->user->firstName,
+                'lastName' => $proposals->advertiser->user->lastName,
+                'email' => $proposals->advertiser->user->email,
+            ]
         ];
     }
 
-    public function includeAdvertiser(Proposal $proposals)
+    public function advertiser(Advertiser $advertiser)
     {
-        return $this->collection($proposals->advertiser(), new AdvertiserTransformer());
+        return $this->collection($advertiser, new AdvertiserTransformer());
     }
+//    public function includeAdvertiser(Proposal $proposals)
+//    {
+//        return $this->collection($proposals->advertiser, new AdvertiserTransformer());
+//    }
 }

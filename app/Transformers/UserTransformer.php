@@ -32,8 +32,7 @@ class UserTransformer extends TransformerAbstract
             'email' => $users->email,
             'photo' => $users->photo,
             'created_at' => $users->created_at,
-            'roles' => $this->addRoleIds($users),
-
+            'roles' => $this->addRoleIds($users)
         ];
     }
 

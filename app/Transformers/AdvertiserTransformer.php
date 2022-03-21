@@ -14,7 +14,6 @@ class AdvertiserTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-        'roles'
     ];
 
     protected array $availableIncludes = [];
@@ -28,7 +27,7 @@ class AdvertiserTransformer extends TransformerAbstract
     {
         return [
             'user_id' => $advertiser->user_id,
-            'firstName' =>  $advertiser->user()->firstName,
+            'firstName' =>  $advertiser->user->firstName,
         ];
     }
 

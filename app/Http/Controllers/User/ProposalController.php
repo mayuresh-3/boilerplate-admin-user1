@@ -45,6 +45,7 @@ class ProposalController extends Controller
     public function index()
     {
         $proposals = QueryBuilder::for(Proposal::class)
+            ->with('advertiser.user')
             ->allowedFilters([
                     'title'
                 ]
@@ -106,8 +107,8 @@ class ProposalController extends Controller
     }
 
     public function show($id) {
-        $proposal = Proposal::with('advertiser')->where('id',$id )->first();
-       // $proposal = Proposal::find($id);
+        $proposal = Proposal::with('advertiser.user')->where('id',$id )->first();
+        // $proposal = Proposal::find($id);
         if (!$proposal) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
         }
