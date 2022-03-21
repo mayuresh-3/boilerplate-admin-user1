@@ -2,13 +2,21 @@
 
 namespace App\Transformers;
 
+use App\Models\Advertiser;
 use App\Models\Proposal;
 use League\Fractal\TransformerAbstract;
 
 class ProposalTransformer extends TransformerAbstract
 {
 
-
+    /**
+     * List of resources possible to include.
+     *
+     * @var array
+     */
+    protected array $defaultIncludes = [
+        'advertiser'
+    ];
     protected array $availableIncludes = [];
     /**
      * A Fractal transformer.
@@ -33,4 +41,8 @@ class ProposalTransformer extends TransformerAbstract
         ];
     }
 
+    public function includeAdvertiser(Proposal $proposals)
+    {
+        return $this->collection($proposals->advertiser(), new AdvertiserTransformer());
+    }
 }
