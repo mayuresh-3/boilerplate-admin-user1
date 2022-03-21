@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class Campaign extends Model
 {
     use Notifiable;
     use HasRoles;
@@ -18,8 +16,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'title','firstName','lastName', 'email', 'password',
-        'photo', 'updated_by', 'created_by'
+        'title','description','start_date', 'end_date', 'budget', 'advertiser_id', 'proposal_id','status'
     ];
 
     /**
@@ -28,7 +25,6 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
     ];
 
     /**
@@ -37,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
     ];
 
     /**
@@ -60,4 +56,5 @@ class User extends Authenticatable implements JWTSubject
 
         return [];
     }
+    //
 }

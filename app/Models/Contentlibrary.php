@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class Contentlibrary extends Model
 {
     use Notifiable;
     use HasRoles;
@@ -18,9 +16,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'title','firstName','lastName', 'email', 'password',
-        'photo', 'updated_by', 'created_by'
+        'title','description','dimension', 'media_type', 'mediafile', 'status'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -28,7 +26,6 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
     ];
 
     /**
@@ -37,9 +34,10 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
     ];
 
+    protected $table = 'content_library';
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -60,4 +58,5 @@ class User extends Authenticatable implements JWTSubject
 
         return [];
     }
+    //
 }
