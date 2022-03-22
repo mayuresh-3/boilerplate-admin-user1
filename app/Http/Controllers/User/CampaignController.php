@@ -132,4 +132,24 @@ class CampaignController extends Controller
         $proposal->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function campaignByProposalId($proposalId)
+    {
+        $campaigns = QueryBuilder::for(Campaign::class)
+            ->where('proposal_id',$proposalId)
+            ->allowedFilters([
+                    'title'
+                ]
+            )
+            ->allowedSorts(
+                AllowedSort::field('title'),
+            )
+            ->jsonPaginate();
+
+        $response = fractal()
+            ->collection($campaigns, new CampaignTransformer(), 'data')
+            ->paginateWith(new IlluminatePaginatorAdapter($campaigns))->toArray();
+
+        return response()->json($response, Response::HTTP_OK);
+    }
 }

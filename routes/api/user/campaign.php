@@ -7,4 +7,6 @@ Route::middleware('auth:users')->group(function () {
     Route::delete('/campaigns/{id}', [CampaignController::class, 'destroy']);
     Route::post('/campaigns', [CampaignController::class, 'store']);
     Route::put('/campaigns/{id}', [CampaignController::class, 'update']);
+    Route::get('/campaignByProposalId/{id}', [CampaignController::class, 'campaignByProposalId']);
+
 });
