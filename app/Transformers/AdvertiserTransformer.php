@@ -26,8 +26,11 @@ class AdvertiserTransformer extends TransformerAbstract
     public function transform(Advertiser $advertiser)
     {
         return [
-            'user_id' => $advertiser->user_id,
-            'firstName' =>  $advertiser->user->firstName,
+            'advertiser_id' => $advertiser->user_id,
+            'firstName' => $advertiser->user->firstName,
+            'lastName' => $advertiser->user->lastName,
+            'email' => $advertiser->user->email,
+            'photo' => $advertiser->user->photo,
         ];
     }
 
