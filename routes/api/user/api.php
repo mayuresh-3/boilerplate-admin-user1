@@ -32,3 +32,6 @@ require __DIR__ . '/fileUpload.php';
 
 // content library
 require __DIR__ . '/contentlibrary.php';
+
+//product
+require __DIR__ . '/product.php';
