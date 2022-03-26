@@ -39,4 +39,9 @@ class Campaign extends Model
     {
         $this->belongsTo(Proposal::class,'id','proposal_id');
     }
+
+    public function contents()
+    {
+        $this->belongsToMany(Contentlibrary::class, 'campaign_content_mapp', 'campaign_id', 'content_liv_id');
+    }
 }
