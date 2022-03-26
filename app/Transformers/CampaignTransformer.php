@@ -38,6 +38,6 @@ class CampaignTransformer extends TransformerAbstract
 
     public function includeContents(Campaign $campaign)
     {
-        return $this->collection($campaign->contents, new CampaignTransformer());
+        return $this->collection($campaign->contents, new ContentlibraryTransformer());
     }
 }
