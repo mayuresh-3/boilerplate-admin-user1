@@ -27,9 +27,10 @@ class ProductTransformer extends TransformerAbstract
     {
         return [
             'id' => $products->id,
-            'title' => $products->title,
+            'name' => $products->name,
             'description' => $products->description,
-            'status' => $products->status,
+            'days' => $products->days,
+            'active' => $products->active,
         ];
     }
 }
