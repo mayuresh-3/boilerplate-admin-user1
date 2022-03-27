@@ -3,13 +3,16 @@
 namespace App\Transformers;
 
 use App\Models\Campaign;
+use App\Models\Proposal;
 use League\Fractal\TransformerAbstract;
 
 class CampaignTransformer extends TransformerAbstract
 {
 
 
-    protected array $availableIncludes = [];
+    protected array $defaultIncludes = [
+        'contents',
+    ];
     /**
      * A Fractal transformer.
      *
@@ -33,4 +36,8 @@ class CampaignTransformer extends TransformerAbstract
         ];
     }
 
+    public function includeContents(Campaign $campaign)
+    {
+        return $this->collection($campaign->contents, new ContentlibraryTransformer());
+    }
 }

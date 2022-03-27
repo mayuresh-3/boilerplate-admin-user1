@@ -45,6 +45,7 @@ class CampaignController extends Controller
     public function index()
     {
         $campaigns = QueryBuilder::for(Campaign::class)
+            ->with('contents')
             ->allowedFilters([
                     'title'
                 ]
