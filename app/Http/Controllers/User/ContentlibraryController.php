@@ -114,7 +114,7 @@ class ContentlibraryController extends Controller
         return response()->json($response,Response::HTTP_OK);
     }
 
-    public function update(Contentlibrary $request, $id) {
+    public function update(CampaignRequest $request, $id) {
         $user = Contentlibrary::find($id);
         $contentlibraryData = $request->all();
         $contentlibraryData['updated_by'] = auth()->user()->id;
@@ -125,6 +125,7 @@ class ContentlibraryController extends Controller
             'message' => 'Library data updated successfully',
         ], Response::HTTP_CREATED);
     }
+
     public function destroy($id) {
         $contentlibrary = Contentlibrary::find($id);
         $contentlibrary->forceDelete();
