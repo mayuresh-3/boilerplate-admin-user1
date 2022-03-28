@@ -21,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = QueryBuilder::for(User::class)
+            ->with('influencers')
             ->allowedFilters([
                     'firstName',
                     'email',
@@ -59,7 +60,7 @@ class UserController extends Controller
     }
 
     public function show($id) {
-        $user = User::find($id);
+        $user = User::with('influencers.social')->find($id);
         if (!$user) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
         }

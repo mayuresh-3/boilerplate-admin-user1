@@ -13,7 +13,8 @@ class UserTransformer extends TransformerAbstract
      * @var array
      */
     protected array $defaultIncludes = [
-        'roles'
+        'roles',
+        'influencers'
     ];
 
     protected array $availableIncludes = [];
@@ -39,6 +40,11 @@ class UserTransformer extends TransformerAbstract
     public function includeRoles(User $users)
     {
         return $this->collection($users->roles, new RoleTransformer());
+    }
+
+    public function includeInfluencers(User $users)
+    {
+        return $this->collection($users->influencers, new InfluencerTransformer());
     }
 
     public function addRoleIds(User $users)

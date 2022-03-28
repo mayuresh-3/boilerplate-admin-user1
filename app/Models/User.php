@@ -65,4 +65,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Advertiser::class);
     }
+
+    public function influencers()
+    {
+        return $this->hasMany(Influencer::class);
+    }
 }

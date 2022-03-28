@@ -35,3 +35,5 @@ require __DIR__ . '/contentlibrary.php';
 
 //product
 require __DIR__ . '/product.php';
+
+require __DIR__ . '/influencer.php';
