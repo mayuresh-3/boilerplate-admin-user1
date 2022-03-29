@@ -7,4 +7,5 @@ Route::middleware('auth:users')->group(function () {
     Route::delete('/contentlib/{id}', [ContentlibraryController::class, 'destroy']);
     Route::post('/contentlib', [ContentlibraryController::class, 'store']);
     Route::put('/contentlib/{id}', [ContentlibraryController::class, 'update']);
+    Route::get('/contentByAdvertiserId', [ContentlibraryController::class, 'contentByAdvertiserId']);
 });

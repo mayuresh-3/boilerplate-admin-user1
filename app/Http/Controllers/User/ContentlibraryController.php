@@ -94,6 +94,7 @@ class ContentlibraryController extends Controller
         // $roleName = $request->get('role');
         $contentlibraryData = $request->all();
         $contentlibraryData['created_by'] = auth()->user()->id;
+        $contentlibraryData['advertiser_id'] = auth()->user()->id;
         $contentlibrary = Contentlibrary::create($contentlibraryData);
         //$contentlibrary->assignRole($roleName);
 
@@ -130,5 +131,25 @@ class ContentlibraryController extends Controller
         $contentlibrary = Contentlibrary::find($id);
         $contentlibrary->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function contentByAdvertiserId()
+    {
+        $campaigns = QueryBuilder::for(Contentlibrary::class)
+            ->where('advertiser_id',auth()->user()->id)
+            ->allowedFilters([
+                    'title'
+                ]
+            )
+            ->allowedSorts(
+                AllowedSort::field('title'),
+            )
+            ->jsonPaginate();
+
+        $response = fra()
+            ->collection($campaigns, new Contentlibrary(), 'data')
+            ->paginateWith(new IlluminatePaginatorAdapter($campaigns))->toArray();
+
+        return response()->json($response, Response::HTTP_OK);
     }
 }
