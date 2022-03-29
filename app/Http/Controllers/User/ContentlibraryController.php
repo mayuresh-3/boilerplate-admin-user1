@@ -115,7 +115,7 @@ class ContentlibraryController extends Controller
         return response()->json($response,Response::HTTP_OK);
     }
 
-    public function update(CampaignRequest $request, $id) {
+    public function update(ContentlibraryRequest $request, $id) {
         $user = Contentlibrary::find($id);
         $contentlibraryData = $request->all();
         $contentlibraryData['updated_by'] = auth()->user()->id;
@@ -146,7 +146,7 @@ class ContentlibraryController extends Controller
             )
             ->jsonPaginate();
 
-        $response = fra()
+        $response = fractal()
             ->collection($campaigns, new Contentlibrary(), 'data')
             ->paginateWith(new IlluminatePaginatorAdapter($campaigns))->toArray();
 
