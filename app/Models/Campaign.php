@@ -44,4 +44,9 @@ class Campaign extends Model
     {
         return $this->belongsToMany(Contentlibrary::class, 'campaign_content_mapp', 'campaign_id', 'content_lib_id');
     }
+
+    public function influencers()
+    {
+        return $this->belongsToMany(Influencer::class, 'campaign_influencers_map', 'influencer_id', 'influencer_id');
+    }
 }

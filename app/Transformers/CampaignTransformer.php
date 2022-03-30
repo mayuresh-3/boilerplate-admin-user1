@@ -11,7 +11,6 @@ class CampaignTransformer extends TransformerAbstract
 
 
     protected array $defaultIncludes = [
-        'contents',
     ];
     /**
      * A Fractal transformer.
@@ -32,12 +31,19 @@ class CampaignTransformer extends TransformerAbstract
             'updated_at' => $campaign->updated_at,
             'advertiser_id' => $campaign->advertiser_id,
             'proposal_id' => $campaign->proposal_id,
-            'status' => $campaign->status
+            'status' => $campaign->status,
+            'contents' => $this->addContents($campaign),
+            'influencers' => $this->addInfluencers($campaign)
         ];
     }
 
-    public function includeContents(Campaign $campaign)
+    public function addContents(Campaign $campaign)
     {
-        return $this->collection($campaign->contents, new ContentlibraryTransformer());
+        return $campaign->contents->pluck('id');
+    }
+
+    public function addInfluencers(Campaign $campaign)
+    {
+        return $campaign->influencers->pluck('id');
     }
 }
