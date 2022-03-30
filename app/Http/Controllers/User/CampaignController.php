@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\CampaignRequest;
 use App\Models\Campaign;
+use App\Models\Campaign_content_mapp;
+use App\Models\Campaign_influencers_map;
 use App\Transformers\CampaginTransformer;
 use App\Transformers\CampaignTransformer;
 use Carbon\Carbon;
@@ -97,9 +99,21 @@ class CampaignController extends Controller
         $campaignData = $request->all();
         $campaignData['created_by'] = auth()->user()->id;
         $campaignData['advertiser_id'] = auth()->user()->id;
-        $proposal = Campaign::create($campaignData);
-        //$proposal->assignRole($roleName);
+        $campaign = Campaign::create($campaignData);
 
+        $contents = $request->contents;
+        if (count($contents) >0) {
+            foreach ($contents as $key => $val) {
+                $content = Campaign_content_mapp::create(['campaign_id'=> $campaign->id, 'content_lib_id'=>$val, 'created_by' => auth()->user()->id]);
+            }
+        }
+
+        $influencers = $request->influencers;
+        if (count($influencers) >0) {
+            foreach ($influencers as $key => $val) {
+                $content = Campaign_influencers_map::create(['influencer_id' =>$val , 'campaign_id'=> $campaign->id,  'created_by' => auth()->user()->id]);
+            }
+        }
         return response()->json([
             'status' => 'success',
             'message' => 'Campaign created successfully',
@@ -122,6 +136,20 @@ class CampaignController extends Controller
         $campaignData = $request->all();
         $campaignData['updated_by'] = auth()->user()->id;
         $user->update($campaignData);
+
+        $contents = $request->contents;
+        if (count($contents) >0) {
+            foreach ($contents as $key => $val) {
+                $content = Campaign_content_mapp::create(['campaign_id'=> $id, 'content_lib_id'=>$val, 'updated_by' => auth()->user()->id]);
+            }
+        }
+
+        $influencers = $request->influencers;
+        if (count($influencers) >0) {
+            foreach ($influencers as $key => $val) {
+                $content = Campaign_influencers_map::create(['influencer_id' =>$val , 'campaign_id'=> $id,  'updated_by' => auth()->user()->id]);
+            }
+        }
 
         return response()->json([
             'status' => 'success',
