@@ -33,7 +33,8 @@ class CampaignTransformer extends TransformerAbstract
             'proposal_id' => $campaign->proposal_id,
             'status' => $campaign->status,
             'contents' => $this->addContents($campaign),
-            'influencers' => $this->addInfluencers($campaign)
+            'influencers' => $this->addInfluencers($campaign),
+            'products' => $this->addProducts($campaign)
         ];
     }
 
@@ -45,5 +46,9 @@ class CampaignTransformer extends TransformerAbstract
     public function addInfluencers(Campaign $campaign)
     {
         return $campaign->influencers->pluck('id');
+    }
+    public function addProducts(Campaign $campaign)
+    {
+        return $campaign->products->pluck('id');
     }
 }
