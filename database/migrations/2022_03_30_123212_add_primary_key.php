@@ -14,7 +14,8 @@ class AddPrimaryKey extends Migration
     public function up()
     {
         Schema::table('campaign_influencers_map', function (Blueprint $table) {
-            DB::statement('ALTER TABLE `campaign_content_mapp` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT');
+            DB::statement('DELETE from campaign_content_mapp where 1 ');
+            DB::statement('ALTER TABLE `campaign_content_mapp` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT, add PRIMARY KEY (`id`)');
             DB::statement('ALTER TABLE `campaign_content_mapp` ADD UNIQUE( `campaign_id`, `content_lib_id`)');
             DB::statement('ALTER TABLE `campaign_influencers_map` ADD UNIQUE( `influencer_id`, `campaign_id`)');
         });

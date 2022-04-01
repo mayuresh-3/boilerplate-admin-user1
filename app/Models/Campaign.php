@@ -47,6 +47,11 @@ class Campaign extends Model
 
     public function influencers()
     {
-        return $this->belongsToMany(Influencer::class, 'campaign_influencers_map', 'influencer_id', 'influencer_id');
+        return $this->belongsToMany(Influencer::class, 'campaign_influencers_map', 'campaign_id', 'influencer_id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'campaign_product_mapp', 'campaign_id', 'product_id');
     }
 }
