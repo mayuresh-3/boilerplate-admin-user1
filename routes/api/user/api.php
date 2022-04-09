@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
-
+use App\Http\Controllers\User\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,3 +37,6 @@ require __DIR__ . '/contentlibrary.php';
 require __DIR__ . '/product.php';
 
 require __DIR__ . '/influencer.php';
+
+Route::get('/login/{provider}', [AuthController::class,'redirectToProvider']);
+Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderCallback']);
