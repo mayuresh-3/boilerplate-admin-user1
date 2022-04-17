@@ -16,7 +16,7 @@ class Contentlibrary extends Model
      * @var array
      */
     protected $fillable = [
-        'title','description','dimension', 'media_type', 'mediafile', 'status', 'advertiser_id'
+        'title','description','dimension', 'media_type_id', 'mediafile', 'status', 'advertiser_id', 'tags'
     ];
 
 

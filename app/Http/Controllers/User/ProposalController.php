@@ -115,7 +115,11 @@ class ProposalController extends Controller
         }
         $response = fractal()
             ->item($proposal, new ProposalTransformer(), 'data')->toArray();
-
+        $campaignBudget = 0;
+        foreach($response['data']['campaigns'] as $k => $v) {
+           $campaignBudget += $v['budget'];
+        }
+        $response['data']['pendingBudget'] = $response['data']['budget'] - $campaignBudget;
         return response()->json($response,Response::HTTP_OK);
     }
 
