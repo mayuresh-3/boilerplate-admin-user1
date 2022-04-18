@@ -37,3 +37,5 @@ require __DIR__ . '/contentlibrary.php';
 require __DIR__ . '/product.php';
 
 require __DIR__ . '/influencer.php';
+
+require __DIR__ . '/mediatype.php';
