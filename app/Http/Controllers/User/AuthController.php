@@ -3,13 +3,11 @@
 namespace  App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\JsonResponse;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -70,7 +68,15 @@ class AuthController extends Controller
         );
         $token = $userCreated->createToken('token-name')->plainTextToken;
 
-        return response()->json($userCreated, 200, ['Access-Token' => $token]);
+        if (! $token = JWTAuth::fromUser($userCreated)) {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
+        // return access token & user data
+        return response()->json([
+            'token' => $token,
+            'user' => $user
+        ], 200);
+//        return response()->json($userCreated, 200, ['Access-Token' => $token]);
     }
 
     /**
