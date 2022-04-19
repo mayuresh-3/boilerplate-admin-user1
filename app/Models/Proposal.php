@@ -18,7 +18,7 @@ class Proposal extends Model
      * @var array
      */
     protected $fillable = [
-        'title','description','start_date', 'end_date', 'min_budget', 'max_budget', 'advertiser_id','status'
+        'title','description','start_date', 'end_date', 'budget', 'advertiser_id','status'
     ];
 
     /**

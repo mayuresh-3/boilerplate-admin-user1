@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\CampaignRequest;
 use App\Models\Campaign;
+use App\Models\Campaign_content_mapp;
+use App\Models\Campaign_influencers_map;
+use App\Models\campaign_product_mapp;
+use App\Product;
 use App\Transformers\CampaginTransformer;
 use App\Transformers\CampaignTransformer;
 use Carbon\Carbon;
@@ -46,6 +50,8 @@ class CampaignController extends Controller
     {
         $campaigns = QueryBuilder::for(Campaign::class)
             ->with('contents')
+            ->with('influencers')
+            ->with('products')
             ->allowedFilters([
                     'title'
                 ]
@@ -97,9 +103,28 @@ class CampaignController extends Controller
         $campaignData = $request->all();
         $campaignData['created_by'] = auth()->user()->id;
         $campaignData['advertiser_id'] = auth()->user()->id;
-        $proposal = Campaign::create($campaignData);
-        //$proposal->assignRole($roleName);
+        $campaign = Campaign::create($campaignData);
 
+        $contents = $request->contents;
+        if (count($contents) >0) {
+            foreach ($contents as $key => $val) {
+                $content = Campaign_content_mapp::create(['campaign_id'=> $campaign->id, 'content_lib_id'=>$val, 'created_by' => auth()->user()->id]);
+            }
+        }
+
+        $influencers = $request->influencers;
+        if (count($influencers) >0) {
+            foreach ($influencers as $key => $val) {
+                $content = Campaign_influencers_map::create(['influencer_id' =>$val , 'campaign_id'=> $campaign->id,  'created_by' => auth()->user()->id]);
+            }
+        }
+
+        $products = $request->products;
+        if (count($products) >0) {
+            foreach ($products as $key => $val) {
+                $content = campaign_product_mapp::create(['product_id' =>$val , 'campaign_id'=> $campaign->id,  'created_by' => auth()->user()->id]);
+            }
+        }
         return response()->json([
             'status' => 'success',
             'message' => 'Campaign created successfully',
@@ -122,6 +147,63 @@ class CampaignController extends Controller
         $campaignData = $request->all();
         $campaignData['updated_by'] = auth()->user()->id;
         $user->update($campaignData);
+
+        $contents = $request->contents;
+        $dbContents = $user->contents->pluck('id')->toarray();
+/////////////////////////////////////
+        if (count($contents) >0) {
+            foreach ($contents as $key => $val) {
+                if (!in_array($val, $dbContents)) {
+                    $content = Campaign_content_mapp::insert(['campaign_id' => $id, 'content_lib_id' => $val, 'updated_by' => auth()->user()->id]);
+                }
+            }
+        }
+
+        if (count($dbContents) >0) {
+            foreach ($dbContents as $k=> $v) {
+                if (!in_array($v, $contents)) {
+                    $d = Campaign_content_mapp::where('content_lib_id', $v)->where('campaign_id' , $id)->delete();
+                }
+            }
+        }
+////////////////////////////////
+///
+        $influencers = $request->influencers;
+        $dbInfluencers = $user->influencers->pluck('id')->toarray();
+
+        if (count($influencers) >0) {
+            foreach ($influencers as $key => $val) {
+                if (!in_array($val, $dbInfluencers)) {
+                    $content = Campaign_influencers_map::insert(['campaign_id' => $id, 'influencer_id' => $val, 'updated_by' => auth()->user()->id]);
+                }
+            }
+        }
+
+        if (count($dbInfluencers) >0) {
+            foreach ($dbInfluencers as $k=> $v) {
+                if (!in_array($v, $influencers)) { echo $v."----".id;
+                    $d = Campaign_influencers_map::where('influencer_id', $v)->where('campaign_id' , $id)->delete();
+                }
+            }
+        }
+
+        $products = $request->products;
+        $dbProducts = $user->products->pluck('id')->toarray();
+        if (count($products) >0) {
+            foreach ($products as $key => $val) {
+                if (!in_array($val, $dbProducts)) {
+                    $content = Campaign_product_mapp::insert(['campaign_id' => $id, 'product_id' => $val, 'updated_by' => auth()->user()->id]);
+                }
+            }
+        }
+
+        if (count($dbProducts) >0) {
+            foreach ($dbProducts as $k=> $v) {
+                if (!in_array($v, $products)) {
+                    $d = campaign_product_mapp::where('product_id', $v)->where('campaign_id' , $id)->delete();
+                }
+            }
+        }
 
         return response()->json([
             'status' => 'success',

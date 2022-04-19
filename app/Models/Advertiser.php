@@ -26,4 +26,9 @@ class Advertiser extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function contents()
+    {
+        return $this->hasMany(Contentlibrary::class);
+    }
+
 }

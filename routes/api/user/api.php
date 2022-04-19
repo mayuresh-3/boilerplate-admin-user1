@@ -38,5 +38,9 @@ require __DIR__ . '/product.php';
 
 require __DIR__ . '/influencer.php';
 
+
 Route::get('/login/{provider}', [AuthController::class,'redirectToProvider']);
 Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderCallback']);
+
+require __DIR__ . '/mediatype.php';
+
