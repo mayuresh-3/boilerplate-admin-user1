@@ -59,4 +59,9 @@ class Contentlibrary extends Model
         return [];
     }
     //
+    public function mediaType()
+    {
+        return $this->belongsTo(Mediatype::class,'media_type_id','media_type_id');
+    }
+
 }

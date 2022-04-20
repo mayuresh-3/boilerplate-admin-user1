@@ -21,6 +21,7 @@ class MediatypeTransformer extends TransformerAbstract
     public function transform(Mediatype $proposals)
     {
         return [
+            'media_type_id' => $proposals->media_type_id,
             'media_type_name' => $proposals->media_type_name,
             'extension' => $proposals->extension,
             'status' => $proposals->status

@@ -120,6 +120,7 @@ class ProposalController extends Controller
            $campaignBudget += $v['budget'];
         }
         $response['data']['pendingBudget'] = $response['data']['budget'] - $campaignBudget;
+        $response['data']['campaignBudget'] = $campaignBudget;
         return response()->json($response,Response::HTTP_OK);
     }
 
