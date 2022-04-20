@@ -13,7 +13,7 @@ class CustomDataArraySerializer extends ArraySerializer
     /**
      * Serialize a collection.
      */
-    public function collection(string $resourceKey, array $data): array
+    public function collection(?string $resourceKey, array $data): array
     {
         return ($resourceKey && $resourceKey != 'include') ? [$resourceKey => $data] : $data;
     }
@@ -21,7 +21,7 @@ class CustomDataArraySerializer extends ArraySerializer
     /**
      * Serialize an item.
      */
-    public function item(string $resourceKey, array $data): array
+    public function item(?string $resourceKey, array $data): array
     {
         return ($resourceKey && $resourceKey != 'include') ? [$resourceKey => $data] : $data;
     }

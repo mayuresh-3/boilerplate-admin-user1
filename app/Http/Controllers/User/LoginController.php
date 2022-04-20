@@ -38,6 +38,10 @@ class LoginController extends Controller
     {
         $user = auth()->user();
         $token = auth()->refresh();
+        if (!$token) {
+            return response()->json(['error' => 'Token expired'], Response::HTTP_UNAUTHORIZED);
+        }
+
         $response = fractal()
             ->item($user, new UserTransformer(), 'data')->toArray();
 

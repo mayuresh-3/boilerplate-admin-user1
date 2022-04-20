@@ -14,6 +14,7 @@ class Advertiser extends Model
     protected $fillable = [
         'user_id'
     ];
+    public $timestamps = false;
 
     protected $table = 'advertisers_details';
 

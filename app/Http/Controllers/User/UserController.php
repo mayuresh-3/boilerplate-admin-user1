@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\FiltersUserPermission;
 use App\Http\Requests\UserRequest;
+use App\Models\Advertiser;
 use App\Models\User;
 use App\Transformers\UserTransformer;
 use Carbon\Carbon;
@@ -52,6 +53,10 @@ class UserController extends Controller
         $userData['created_by'] = optional(auth()->user())->id || 0;
         $user = User::create($userData);
         $user->assignRole($roleName);
+        if ($roleName === 'advertiser') {
+            Advertiser::create(['user_id' => $user->id ]);
+        }
+
 
         return response()->json([
             'status' => 'success',
@@ -73,6 +78,12 @@ class UserController extends Controller
     public function update(UserRequest $request, $id) {
         $user = User::find($id);
         $roleName = $request->get('role');
+        if($roleName === 'advertiser') {
+            $userAdvertiser = Advertiser::where('user_id', $user->id)->first();
+            if(!$userAdvertiser) {
+                Advertiser::create(['user_id' => $user->id ]);
+            }
+        }
         $userData = $request->all();
         unset($userData['role']);
         unset($userData['confirmPassword']);
@@ -85,6 +96,7 @@ class UserController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Account created successfully',
+            'data' => $user,
         ], Response::HTTP_CREATED);
     }
 
