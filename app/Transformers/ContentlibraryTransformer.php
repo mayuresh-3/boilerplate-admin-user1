@@ -24,13 +24,19 @@ class ContentlibraryTransformer extends TransformerAbstract
             'title' => $proposals->title,
             'description' => $proposals->description,
             'dimension' => $proposals->dimension,
-            'media_type' => $proposals->media_type_id,
+            'media_type_id' => $proposals->media_type_id,
             'mediafile' => $proposals->mediafile,
             'created_at' => $proposals->created_at,
             'updated_at' => $proposals->updated_at,
             'status' => $proposals->status,
-            'tags' => $proposals->tags
+            'tags' => $proposals->tags,
+            'media_type' => $this->addMediaType($proposals)
         ];
     }
 
+
+    public function addMediaType(Contentlibrary $proposals)
+    {
+        return $proposals->mediaType()->pluck('media_type_name')->first();
+    }
 }

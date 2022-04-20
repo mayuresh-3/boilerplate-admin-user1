@@ -39,5 +39,8 @@ class Mediatype extends Model
 
     ];
 
-
+    public function contents()
+    {
+        return $this->hasMany(Contentlibrary::class);
+    }
 }
