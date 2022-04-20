@@ -16,7 +16,7 @@ class Contentlibrary extends Model
      * @var array
      */
     protected $fillable = [
-        'title','description','dimension', 'media_type', 'mediafile', 'status', 'advertiser_id'
+        'title','description','dimension', 'media_type_id', 'mediafile', 'status', 'advertiser_id', 'tags'
     ];
 
 
@@ -59,4 +59,9 @@ class Contentlibrary extends Model
         return [];
     }
     //
+    public function mediaType()
+    {
+        return $this->belongsTo(Mediatype::class,'media_type_id','media_type_id');
+    }
+
 }

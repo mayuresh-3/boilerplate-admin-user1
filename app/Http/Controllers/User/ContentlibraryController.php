@@ -43,9 +43,12 @@ class ContentlibraryController extends Controller
 
     public function index()
     {
-        $contentlibrarys = QueryBuilder::for(Contentlibrary::class)
+        $contentlibrarys = QueryBuilder::for(Contentlibrary::class)->with('mediaType')
             ->allowedFilters([
-                    'title'
+                    'title',
+                    'media_type_id',
+                    'status',
+                    'tags'
                 ]
             )
             ->allowedSorts(

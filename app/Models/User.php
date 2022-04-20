@@ -8,10 +8,15 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use HasRoles;
+    use HasApiTokens;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -69,5 +74,9 @@ class User extends Authenticatable implements JWTSubject
     public function influencers()
     {
         return $this->hasMany(Influencer::class);
+    }
+    public function providers()
+    {
+        return $this->hasMany(Provider::class,'user_id','id');
     }
 }
