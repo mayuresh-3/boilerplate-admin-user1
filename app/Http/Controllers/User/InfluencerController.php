@@ -51,7 +51,7 @@ class InfluencerController extends Controller
     {
         $userData = $request->all();
         $indluencerData = $request->all();
-        /*$roleName = $request->get('role');
+        $roleName = $request->get('role');
         $userData = $request->all();
         unset($userData['role']);
         unset($userData['confirmPassword']);
@@ -59,9 +59,9 @@ class InfluencerController extends Controller
         $userData['password'] = Hash::make($userData['password']);
         $userData['created_by'] = optional(auth()->user())->id || 0;
         $user = User::create($userData);
-        $user->assignRole($roleName);*/
+        $user->assignRole($roleName);
 
-       $indluencerData['user_id'] = $request->id;
+        $indluencerData['user_id'] = $user->id;
         $indluencerData['tamayou_influencer_id'] = $request->tamayou_id;
 
         $influencer = User_influencer_mapping::create($indluencerData);

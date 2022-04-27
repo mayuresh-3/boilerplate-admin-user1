@@ -79,4 +79,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Provider::class,'user_id','id');
     }
+
+    public function tamayouInfluencers()
+    {
+        return $this->hasOne(User_influencer_mapping::class);
+    }
 }

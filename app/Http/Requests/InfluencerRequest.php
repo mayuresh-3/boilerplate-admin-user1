@@ -26,7 +26,7 @@ class InfluencerRequest extends FormRequest
     {
 
         $rules = [
-            //'user_id' => 'required',
+            'user_id' => 'sometimes',
         ];
 
         return $this->applyRules($rules);

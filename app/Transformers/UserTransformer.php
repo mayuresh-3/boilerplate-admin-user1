@@ -4,6 +4,7 @@ namespace App\Transformers;
 
 use App\Models\User;
 use League\Fractal\TransformerAbstract;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class UserTransformer extends TransformerAbstract
 {
@@ -33,7 +34,8 @@ class UserTransformer extends TransformerAbstract
             'email' => $users->email,
             'photo' => $users->photo,
             'created_at' => $users->created_at,
-            'roles' => $this->addRoleIds($users)
+            'roles' => $this->addRoleIds($users),
+            'tamayouInfluencers' => $this->tamyouInfluencers($users)
         ];
     }
 
@@ -51,4 +53,8 @@ class UserTransformer extends TransformerAbstract
     {
         return $users->roles->pluck('id');
     }
+     public function tamyouInfluencers(User $users)
+     {
+         return $users->tamayouInfluencers->instagram_profile_flag;
+     }
 }

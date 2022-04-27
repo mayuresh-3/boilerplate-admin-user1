@@ -26,8 +26,9 @@ class LoginController extends Controller
         }
 
         $user = auth()->user();
+        $tamayouInfluencer = User::with('tamayouInfluencers')->where('id',$user->id)->first();
         $response = fractal()
-            ->item($user, new UserTransformer(), 'data')->toArray();
+            ->item($tamayouInfluencer, new UserTransformer(), 'data')->toArray();
         $response['access_token'] = $token;
         $response['token_type'] = 'bearer';
         $response['expires_in'] = auth()->factory()->getTTL() * Carbon::SECONDS_PER_MINUTE;
