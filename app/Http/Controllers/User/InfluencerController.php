@@ -38,6 +38,7 @@ class InfluencerController extends Controller
 
     public function getTamayouInfluencer($id)
     {
+        $id = decryptText($id);
         $influencer = Tamayou_instagramprofiles::find($id);
         //$influencer = Tamayou_instagramprofiles::where('id',$id)->get(['id','email_1','full_name', 'handle','frequent_location','followers']);
 
@@ -67,7 +68,7 @@ class InfluencerController extends Controller
     {
         $userData = $request->all();
         $indluencerData = $request->all();
-        $roleName = $request->get('role');
+        $roleName = 'influencer';
         $userData = $request->all();
         unset($userData['role']);
         unset($userData['confirmPassword']);
@@ -120,5 +121,15 @@ class InfluencerController extends Controller
         $response['data']['postsPerWeek'] = $data['postsPerWeek'];
         $response['data']['bio'] = $data['bio'];
         return response()->json($response,Response::HTTP_OK);
+    }
+
+    private function encryptText($text)
+    {
+        return "eyJpdiI6ImxSd" . base64_encode($text);
+    }
+
+    private function decryptText($text)
+    {
+        return base64_decode(substr($text, 13));
     }
 }
