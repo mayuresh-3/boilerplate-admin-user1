@@ -79,7 +79,7 @@ class InfluencerController extends Controller
         $user->assignRole($roleName);
 
         $indluencerData['user_id'] = $user->id;
-        $indluencerData['tamayou_influencer_id'] = $request->tamayou_id;
+        $indluencerData['tamayou_influencer_id'] = $this->decryptText($request->tamayou_id);;
 
         $influencer = User_influencer_mapping::create($indluencerData);
 
