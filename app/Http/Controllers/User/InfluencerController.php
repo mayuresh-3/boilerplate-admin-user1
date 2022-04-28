@@ -54,7 +54,7 @@ class InfluencerController extends Controller
         $response['data'] =[];
         $response['data']['firstName'] = $data['id'];
         $response['data']['firstName'] = $name[0];
-        $response['data']['lastName'] = $name[1];
+        $response['data']['lastName'] = ($name[1]) ?? '';
         $response['data']['email'] = $data['email_1'];
         $response['data']['handle'] = $data['handle'];
         $response['data']['avatar'] = $data['avatar'];
@@ -108,7 +108,7 @@ class InfluencerController extends Controller
         $response['data'] =[];
         $response['data']['firstName'] = $data['id'];
         $response['data']['firstName'] = $name[0];
-        $response['data']['lastName'] = $name[1];
+        $response['data']['lastName'] = ($name[1]) ?? '';
         $response['data']['email'] = $data['email_1'];
         $response['data']['handle'] = $data['handle'];
         $response['data']['avatar'] = $data['avatar'];
