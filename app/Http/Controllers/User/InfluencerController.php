@@ -38,7 +38,7 @@ class InfluencerController extends Controller
 
     public function getTamayouInfluencer($id)
     {
-        $id = decryptText($id);
+        $id = $this->decryptText($id);
         $influencer = Tamayou_instagramprofiles::find($id);
         //$influencer = Tamayou_instagramprofiles::where('id',$id)->get(['id','email_1','full_name', 'handle','frequent_location','followers']);
 
