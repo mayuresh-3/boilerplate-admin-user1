@@ -39,7 +39,13 @@ class TamayouInstagramprofilesTransformer extends TransformerAbstract
             'number_of_posts' => $tamayou_instagramprofiles->number_of_posts,
             'quality_score' => $tamayou_instagramprofiles->quality_score,
             'follower_growth_rate' => $tamayou_instagramprofiles->follower_growth_rate,
-            'status'=> $tamayou_instagramprofiles->status
+            'status'=> $tamayou_instagramprofiles->status,
+            'email_1' =>$tamayou_instagramprofiles->email_1,
+            'frequent_location'=>$tamayou_instagramprofiles->frequent_location,
+            'avatar'=>$tamayou_instagramprofiles->avatar,
+            'engagement'=>$tamayou_instagramprofiles->engagement,
+            'postsPerWeek'=>$tamayou_instagramprofiles->postsPerWeek,
+            'bio'=>$tamayou_instagramprofiles->bio,
         ];
     }
 

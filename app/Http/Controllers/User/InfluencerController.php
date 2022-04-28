@@ -37,13 +37,28 @@ class InfluencerController extends Controller
 
     public function getTamayouInfluencer($id)
     {
-        $contentlibrary = Tamayou_instagramprofiles::find($id);
-        if (!$contentlibrary) {
+        $influencer = Tamayou_instagramprofiles::find($id);
+        //$influencer = Tamayou_instagramprofiles::where('id',$id)->get(['id','email_1','full_name', 'handle','frequent_location','followers']);
+
+        if (!$influencer) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
         }
-        $response = fractal()
-            ->item($contentlibrary, new TamayouInstagramprofilesTransformer(), 'data')->toArray();
+        $name = explode(' ',$influencer->full_name, 2);
 
+        $response = fractal()
+            ->item($influencer, new TamayouInstagramprofilesTransformer(), 'data')->toArray();
+
+        $data = $response['data'];
+        $response['data'] =[];
+        $response['data']['firstName'] = $data['id'];
+        $response['data']['firstName'] = $name[0];
+        $response['data']['lastName'] = $name[1];
+        $response['data']['email'] = $data['email_1'];
+        $response['data']['handle'] = $data['handle'];
+        $response['data']['avatar'] = $data['avatar'];
+        $response['data']['location'] = $data['frequent_location'];
+        $response['data']['followers'] = $data['followers'];
+        $response['data']['medias'] = [];
         return response()->json($response,Response::HTTP_OK);
     }
 
@@ -70,5 +85,37 @@ class InfluencerController extends Controller
             'status' => 'success',
             'message' => 'Influencer mapp created successfully',
         ], Response::HTTP_CREATED);
+    }
+
+    public function getTamayouInfluencerDetails($id)
+    {
+        $influencer = Tamayou_instagramprofiles::find($id);
+        //$influencer = Tamayou_instagramprofiles::where('id',$id)->get(['id','email_1','full_name', 'handle','frequent_location','followers']);
+
+        if (!$influencer) {
+            return response()->json(null, Response::HTTP_NO_CONTENT);
+        }
+        $name = explode(' ',$influencer->full_name, 2);
+
+        $response = fractal()
+            ->item($influencer, new TamayouInstagramprofilesTransformer(), 'data')->toArray();
+
+        $data = $response['data'];
+        $response['data'] =[];
+        $response['data']['firstName'] = $data['id'];
+        $response['data']['firstName'] = $name[0];
+        $response['data']['lastName'] = $name[1];
+        $response['data']['email'] = $data['email_1'];
+        $response['data']['handle'] = $data['handle'];
+        $response['data']['avatar'] = $data['avatar'];
+        $response['data']['location'] = $data['frequent_location'];
+        $response['data']['followers'] = $data['followers'];
+        $response['data']['medias'] = [];
+        $response['data']['categories'] = [];
+        $response['data']['following'] = $data['following'];
+        $response['data']['engagement'] = $data['engagement'];
+        $response['data']['postsPerWeek'] = $data['postsPerWeek'];
+        $response['data']['bio'] = $data['bio'];
+        return response()->json($response,Response::HTTP_OK);
     }
 }

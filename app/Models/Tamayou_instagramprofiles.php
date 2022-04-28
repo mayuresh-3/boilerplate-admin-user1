@@ -13,7 +13,7 @@ class Tamayou_instagramprofiles extends Model
      */
     protected $fillable = [
         'id','handle', 'link', 'full_name', 'followers', 'following', 'post_engagement', 'estimated_cost_of_photo', 'estimated_cost_of_video',
-        'number_of_posts', 'quality_score','follower_growth_rate','status'
+        'number_of_posts', 'quality_score','follower_growth_rate','status','email_1','avatar','frequent_location','engagement','postsPerWeek','bio'
     ];
 
     protected $table = 'tamayou_instagramprofiles';

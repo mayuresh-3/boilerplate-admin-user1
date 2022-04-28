@@ -42,7 +42,7 @@ class ProposalController extends Controller
     {
         $proposals = QueryBuilder::for(Proposal::class)
             ->with('advertiser.user')
-            ->with('campaigns')
+            ->with('campaigns')->where('advertiser_id',auth()->user()->id)
             ->allowedFilters([
                     'title',
                     'created_at',
@@ -107,7 +107,7 @@ class ProposalController extends Controller
     }
 
     public function show($id) {
-        $proposal = Proposal::with('advertiser.user')->with('campaigns')->where('id',$id )->first();
+        $proposal = Proposal::with('advertiser.user')->with('campaigns')->where('id',$id )->where('advertiser_id',auth()->user()->id)->first();
 
         // $proposal = Proposal::find($id);
         if (!$proposal) {
