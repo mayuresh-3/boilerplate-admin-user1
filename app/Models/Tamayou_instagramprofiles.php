@@ -20,4 +20,8 @@ class Tamayou_instagramprofiles extends Model
 
     public $timestamps = false;
 
+    public function categories()
+    {
+        return $this->belongsToMany(Tamayou_profilecategories::class, 'tamayou_instagramprofiles_categories','instagramprofiles_id','profilecategories_id');
+    }
 }

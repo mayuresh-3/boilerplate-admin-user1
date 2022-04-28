@@ -46,7 +46,14 @@ class TamayouInstagramprofilesTransformer extends TransformerAbstract
             'engagement'=>$tamayou_instagramprofiles->engagement,
             'postsPerWeek'=>$tamayou_instagramprofiles->postsPerWeek,
             'bio'=>$tamayou_instagramprofiles->bio,
+            'categories'=>$this->addCategories($tamayou_instagramprofiles)
         ];
     }
+
+    public function addCategories(Tamayou_instagramprofiles $tamayou_instagramprofiles)
+    {
+        return $tamayou_instagramprofiles->categories->pluck('category_name');
+    }
+
 
 }

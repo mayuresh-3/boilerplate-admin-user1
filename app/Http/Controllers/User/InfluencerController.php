@@ -11,6 +11,7 @@ use App\Models\User_influencer_mapping;
 use App\Transformers\TamayouInstagramprofilesTransformer;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class InfluencerController extends Controller
 {
@@ -89,8 +90,10 @@ class InfluencerController extends Controller
 
     public function getTamayouInfluencerDetails($id)
     {
-        $influencer = Tamayou_instagramprofiles::find($id);
-        //$influencer = Tamayou_instagramprofiles::where('id',$id)->get(['id','email_1','full_name', 'handle','frequent_location','followers']);
+        $influencer = QueryBuilder::for(Tamayou_instagramprofiles::class)
+                        ->with('categories')
+                        ->where('id',$id)->first();
+
 
         if (!$influencer) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
@@ -111,7 +114,7 @@ class InfluencerController extends Controller
         $response['data']['location'] = $data['frequent_location'];
         $response['data']['followers'] = $data['followers'];
         $response['data']['medias'] = [];
-        $response['data']['categories'] = [];
+        $response['data']['categories'] = $data['categories'];
         $response['data']['following'] = $data['following'];
         $response['data']['engagement'] = $data['engagement'];
         $response['data']['postsPerWeek'] = $data['postsPerWeek'];
