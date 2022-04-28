@@ -91,6 +91,9 @@ class InfluencerController extends Controller
 
     public function getTamayouInfluencerDetails($id)
     {
+
+        $usrDtl = QueryBuilder::for(User_influencer_mapping::class)->where('user_id',$id)->first();
+        $id = $usrDtl->tamayou_influencer_id;
         $influencer = QueryBuilder::for(Tamayou_instagramprofiles::class)
                         ->with('categories')
                         ->where('id',$id)->first();
@@ -123,6 +126,11 @@ class InfluencerController extends Controller
         return response()->json($response,Response::HTTP_OK);
     }
 
+    public function getencryptUrl($id)
+    {
+        $response = url('/').'#/influencer/signup?profile_id='.$this->encryptText($id);
+        return response()->json($response,Response::HTTP_OK);
+    }
     private function encryptText($text)
     {
         return "eyJpdiI6ImxSd" . base64_encode($text);
